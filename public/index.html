@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MoodCook</title>
+
+  <!-- Tailwind (CDN) -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family:"Poppins",sans-serif; }
+    .hero-bg { background:#f4c7d0; }
+  </style>
+</head>
+
+<body class="text-gray-800">
+  <!-- ===== NAVBAR ===== -->
+  <header class="bg-white shadow-sm">
+    <div class="container mx-auto flex items-center justify-between py-4 px-4 md:px-8">
+      <a href="/" class="text-2xl font-extrabold tracking-wider text-yellow-600">MOOD COOK</a>
+
+      <nav class="hidden md:flex gap-8 text-sm font-semibold uppercase">
+        <a href="/"        class="hover:text-yellow-600">Beranda</a>
+        <a href="#tentang" class="hover:text-yellow-600">Tentang Kami</a>
+        <a href="#resep"   class="hover:text-yellow-600">Resep</a>
+      </nav>
+
+      <!-- Tombol Masuk (hilang saat login) -->
+      <a id="nav-login"
+        href="/login.html"
+        class="hide-when-auth hidden md:inline-block bg-pink-300 text-white font-semibold px-6 py-2 rounded-full hover:bg-pink-400 transition">
+        Masuk
+      </a>
+
+      <!-- Nama user + dropdown (ganti span lama) -->
+      <div id="user-box" class="relative hidden md:inline-block">
+        <!-- label nama (klik untuk toggle) -->
+        <span id="nav-user"
+              class="cursor-pointer font-semibold text-gray-700 select-none"></span>
+
+        <!-- menu kecil -->
+        <div id="user-menu"
+            class="hidden absolute right-0 mt-2 w-32 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
+          <form method="POST" action="/api/logout">
+            <button type="submit"
+                    class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+              Logout
+            </button>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ===== HERO SECTION ===== -->
+  <section class="hero-bg">
+    <div class="container mx-auto flex flex-col-reverse md:flex-row items-center gap-12 px-4 md:px-8 py-20">
+      <!-- teks -->
+      <div class="w-full md:w-1/2">
+        <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-4">
+          Karena Perasaan<br />Juga Butuh Rasa dan Irama
+        </h1>
+        <p class="text-gray-700 mb-8">
+          Dapatkan resep dan musik yang sesuai dengan suasana hatimu.
+        </p>
+
+        <div class="flex gap-4">
+          <a href="/login.html"
+             class="hide-when-auth bg-white text-gray-900 font-semibold border border-gray-300 rounded-full px-8 py-2 hover:bg-gray-100 transition">
+             Masuk
+          </a>
+          <a href="/register.html"
+             class="hide-when-auth bg-white text-gray-900 font-semibold border border-gray-300 rounded-full px-8 py-2 hover:bg-gray-100 transition">
+             Daftar
+          </a>
+        </div>
+      </div>
+
+      <!-- ilustrasi -->
+      <div class="w-full md:w-1/2 flex justify-center">
+        <img src="assets/Hero.png" alt="MoodCook Chef"
+             class="w-[28rem] md:w-[40rem] select-none" draggable="false">
+      </div>
+    </div>
+  </section>
+
+    <!-- ===== ABOUT SECTION ===== -->
+    <section id="tentang" class="py-16 bg-white">
+    <div
+        class="container mx-auto flex flex-col md:flex-row items-center gap-12 px-4 md:px-8"
+    >
+        <!-- ——— Card Logo ——— -->
+        <div
+        class="w-full md:w-1/3 flex items-center justify-center shadow-sm"
+        >
+        <img
+            src="assets/moodcook.png"
+            alt="MoodCook Logo"
+            class="w-full h-full object-contain rounded-lg border"
+        />
+        </div>
+
+
+        <!-- ——— Card Deskripsi ——— -->
+        <div
+        class="w-full md:w-2/3 bg-amber-300/80 border border-amber-400 rounded-2xl
+                p-8 md:p-10 leading-relaxed shadow-sm text-[15px] text-gray-800"
+        >
+        <p class="font-semibold mb-4">
+            MoodCook adalah website yang membantu kamu menemukan resep masakan dan
+            lagu yang sesuai dengan suasana hatimu.
+        </p>
+
+        <p class="mb-4">
+            Kami memahami bahwa perasaan bisa memengaruhi selera makan dan pilihan
+            musik. Karena itu, MoodCook hadir sebagai platform yang menghubungkan
+            mood kamu dengan makanan dan musik yang pas agar hari-harimu terasa
+            lebih baik.
+        </p>
+
+        <p>
+            Dengan satu langkah sederhana, kamu bisa memilih mood, lalu MoodCook
+            akan merekomendasikan hidangan yang cocok dan playlist dari Spotify yang
+            sesuai. Semua dirancang untuk membuat pengalamanmu lebih personal,
+            menyenangkan, dan ringan.
+        </p>
+        </div>
+    </div>
+    </section>
+
+    <!-- ===== WORKFLOW SECTION ===== -->
+    <section id="cara-kerja" class="pt-0">
+    <!-- Judul dengan strip kuning -->
+    <div class="bg-amber-400">
+        <h2 class="container mx-auto text-center py-6 px-4 text-white font-extrabold text-2xl md:text-3xl">
+        Cara Kerja&nbsp;(Langkah&nbsp;1-2-3)
+        </h2>
+    </div>
+
+    <!-- Langkah-langkah -->
+    <div
+    class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-14 py-16 px-4 md:px-8 text-center"
+    >
+    <!-- ───────── Langkah 1 ───────── -->
+    <div class="flex flex-col items-center gap-6">
+        <div class="w-14 h-14 bg-amber-400 rounded-full flex items-center justify-center text-white text-lg font-bold">
+        1
+        </div>
+
+        <img
+        src="assets/Ekspresi.png"
+        alt="Pilih Mood"
+        class="w-52 md:w-64 select-none"
+        draggable="false"
+        />
+
+        <div
+        class="bg-amber-400 text-white uppercase tracking-widest text-xs font-semibold py-3 w-80 text-center"
+        >
+        Pilih&nbsp;Mood&nbsp;Kamu
+        </div>
+    </div>
+
+    <!-- ───────── Langkah 2 ───────── -->
+    <div class="flex flex-col items-center gap-6">
+        <div class="w-14 h-14 bg-amber-400 rounded-full flex items-center justify-center text-white text-lg font-bold">
+        2
+        </div>
+
+        <img
+        src="assets/Buku.png"
+        alt="Rekomendasi Resep dan Lagu"
+        class="w-52 md:w-64 select-none"
+        draggable="false"
+        />
+
+        <div
+        class="bg-amber-400 text-white uppercase tracking-widest text-xs font-semibold py-3 w-80 text-center"
+        >
+        Dapatkan&nbsp;Rekomendasi&nbsp;Resep&nbsp;dan&nbsp;Lagu
+        </div>
+    </div>
+
+    <!-- ───────── Langkah 3 ───────── -->
+    <div class="flex flex-col items-center gap-6">
+        <div class="w-14 h-14 bg-amber-400 rounded-full flex items-center justify-center text-white text-lg font-bold">
+        3
+        </div>
+
+        <img
+        src="assets/Bebek.png"
+        alt="Nikmati Suasana"
+        class="w-52 md:w-64 select-none"
+        draggable="false"
+        />
+
+        <div
+        class="bg-amber-400 text-white uppercase tracking-widest text-xs font-semibold py-3 w-80 text-center"
+        >
+        Nikmati&nbsp;Dan&nbsp;Atur&nbsp;Suasana&nbsp;Hatimu
+        </div>
+    </div>
+    </div>
+
+    </section>
+
+    <!-- ===== MOOD SELECT SECTION ===== -->
+    <section id="mood" class="pt-0">
+    <!-- Judul strip biru -->
+    <div class="bg-cyan-400">
+        <h2
+        class="container mx-auto text-center py-6 px-4 text-white font-extrabold text-2xl md:text-3xl"
+        >
+        Pilih Mood
+        </h2>
+    </div>
+
+    <!-- Tombol-tombol mood -->
+    <div class="container mx-auto flex flex-col gap-6 py-14 px-4 md:px-0">
+        <!-- angry -->
+        <a
+        href="#"
+        data-mood="angry"
+        class="mood-btn flex items-center justify-between w-full md:w-[28rem] mx-auto
+                py-4 px-8 rounded-full border-2 border-red-700
+                bg-red-600 text-white font-semibold tracking-wide hover:opacity-90 transition"
+        >
+        <span>Marah</span>
+        <span
+            class="w-9 h-9 flex items-center justify-center rounded-full bg-white text-red-600 text-lg"
+            >😡</span
+        >
+        </a>
+
+        <!-- happy -->
+        <a
+        href="#"
+        data-mood="happy"
+        class="mood-btn flex items-center justify-between w-full md:w-[28rem] mx-auto
+                py-4 px-8 rounded-full border-2 border-rose-400
+                bg-rose-200 text-gray-900 font-semibold tracking-wide hover:opacity-90 transition"
+        >
+        <span>Senang</span>
+        <span
+            class="w-9 h-9 flex items-center justify-center rounded-full bg-white text-rose-500 text-lg"
+            >✨</span
+        >
+        </a>
+
+        <!-- sad -->
+        <a
+        href="#"
+        data-mood="sad"
+        class="mood-btn flex items-center justify-between w-full md:w-[28rem] mx-auto
+                py-4 px-8 rounded-full border-2 border-cyan-600
+                bg-cyan-300 text-gray-900 font-semibold tracking-wide hover:opacity-90 transition"
+        >
+        <span>Sedih</span>
+        <span
+            class="w-9 h-9 flex items-center justify-center rounded-full bg-white text-cyan-600 text-lg"
+            >☹️</span
+        >
+        </a>
+
+        <!-- bored -->
+        <a
+        href="#"
+        data-mood="bored"
+        class="mood-btn flex items-center justify-between w-full md:w-[28rem] mx-auto
+                py-4 px-8 rounded-full border-2 border-amber-300
+                bg-amber-100 text-gray-900 font-semibold tracking-wide hover:opacity-90 transition"
+        >
+        <span>Bosan</span>
+        <span
+            class="w-9 h-9 flex items-center justify-center rounded-full bg-white text-amber-400 text-lg"
+            >😪</span
+        >
+        </a>
+    </div>
+    </section>
+
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="bg-[#e8b9c2] py-16 text-sm text-gray-100">
+      <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 px-6 md:px-8">
+
+        <!-- kolom kiri -->
+        <div class="space-y-5">
+          <h3 class="text-lg font-semibold text-white">Mood Cook</h3>
+          <ul class="space-y-1">
+            <li>Kontak • +6281234568899</li>
+            <li>Email • hi@moodcook.com</li>
+            <li>Instagram • mood.cook</li>
+          </ul>
+
+          <!-- ikon sosmed -->
+          <div class="flex gap-4 pt-4">
+            <!-- instagram -->
+            <a href="#" aria-label="Instagram" class="hover:text-white/80">
+              <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M7 2C4.8 2 3 3.8 3 6v12c0 2.2 1.8 4 4 4h10c2.2 0 4-1.8 4-4V6c0-2.2-1.8-4-4-4H7zm10 2c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H7c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2h10zm-5 3.5A4.5 4.5 0 1 0 16.5 12 4.5 4.5 0 0 0 12 7.5zm0 7.3A2.8 2.8 0 1 1 14.8 12 2.8 2.8 0 0 1 12 14.8zm4.1-8.9a1 1 0 1 1-1-1 1 1 0 0 1 1 1z"/>
+              </svg>
+            </a>
+            <!-- twitter -->
+            <a href="#" aria-label="Twitter" class="hover:text-white/80">
+              <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M22 5.9a8.2 8.2 0 0 1-2.4.7 4.2 4.2 0 0 0 1.8-2.3 8.3 8.3 0 0 1-2.7 1A4.2 4.2 0 0 0 11 8.2a11.9 11.9 0 0 1-8.6-4.4 4.2 4.2 0 0 0 1.3 5.6 4.1 4.1 0 0 1-1.9-.5v.1a4.2 4.2 0 0 0 3.4 4.1 4.2 4.2 0 0 1-1.9.1 4.2 4.2 0 0 0 3.9 3 8.5 8.5 0 0 1-5.3 1.9h-.9a12 12 0 0 0 6.6 1.9c8 0 12.4-6.6 12.4-12.4v-.6A8.7 8.7 0 0 0 22 5.9z"/>
+              </svg>
+            </a>
+            <!-- tiktok -->
+            <span class="w-5 h-5">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 448 512">
+                <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc. -->
+                <path
+                  d="M448 209.9a210.1 210.1 0 0 1 -122.8-39.3V349.4A162.6 162.6 0 1 1 185 188.3V278.2a74.6 74.6 0 1 0 52.2 71.2V0l88 0a121.2 121.2 0 0 0 1.9 22.2h0A122.2 122.2 0 0 0 381 102.4a121.4 121.4 0 0 0 67 20.1z" />
+              </svg>
+            </span>
+          </div>
+        </div>
+
+        <!-- kolom tengah – LOGO CARD (ganti seluruh blok ini) -->
+        <div class="flex justify-center">
+          <div
+            class="bg-amber-100/90 border-amber-300 rounded-2xl w-64 h-64  <!-- ukuran kotak -->
+                  flex items-center justify-center shadow">
+            <img src="assets/moodcook.png"
+                alt="MoodCook logo"
+                class="w-full h-full object-contain select-none rounded-lg" />  <!-- isi penuh -->
+          </div>
+        </div>
+
+        <!-- kolom kanan -->
+        <div class="text-right space-y-6">
+          <h3 class="text-lg font-semibold text-white">Explore</h3>
+          <ul class="space-y-1">
+            <li><a href="/"        class="hover:text-white/80">Beranda</a></li>
+            <li><a href="#tentang" class="hover:text-white/80">Tentang Kami</a></li>
+            <li><a href="#resep"   class="hover:text-white/80">Resep</a></li>
+          </ul>
+
+          <!-- ikon sosmed lain -->
+          <div class="flex justify-end gap-4 pt-4">
+            <!-- pinterest -->
+            <span class="w-5 h-5">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 496 600">
+                <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc. -->
+                <path
+                  d="M496 256c0 137-111 248-248 248-25.6 0-50.2-3.9-73.4-11.1 10.1-16.5 25.2-43.5 30.8-65 3-11.6 15.4-59 15.4-59 8.1 15.4 31.7 28.5 56.8 28.5 74.8 0 128.7-68.8 128.7-154.3 0-81.9-66.9-143.2-152.9-143.2-107 0-163.9 71.8-163.9 150.1 0 36.4 19.4 81.7 50.3 96.1 4.7 2.2 7.2 1.2 8.3-3.3 .8-3.4 5-20.3 6.9-28.1 .6-2.5 .3-4.7-1.7-7.1-10.1-12.5-18.3-35.3-18.3-56.6 0-54.7 41.4-107.6 112-107.6 60.9 0 103.6 41.5 103.6 100.9 0 67.1-33.9 113.6-78 113.6-24.3 0-42.6-20.1-36.7-44.8 7-29.5 20.5-61.3 20.5-82.6 0-19-10.2-34.9-31.4-34.9-24.9 0-44.9 25.7-44.9 60.2 0 22 7.4 36.8 7.4 36.8s-24.5 103.8-29 123.2c-5 21.4-3 51.6-.9 71.2C65.4 450.9 0 361.1 0 256 0 119 111 8 248 8s248 111 248 248z" />
+              </svg>
+            </span>
+            <!-- facebook -->
+            <a href="#" aria-label="Facebook" class="hover:text-white/80">
+              <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M14 3h3V0h-3c-2.8 0-5 2.2-5 5v3H6v4h3v9h4v-9h3l1-4h-4V5c0-.6.4-1 1-1z"/>
+              </svg>
+            </a>
+            <!-- youtube -->
+            <a href="#" aria-label="YouTube" class="hover:text-white/80">
+              <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M21.8 8s-.2-1.4-.8-2a2.8 2.8 0 0 0-2-1.1C16.3 4.5 12 4.5 12 4.5h0s-4.3 0-6.9.4a2.8 2.8 0 0 0-2 1.1c-.6.6-.8 2-.8 2S2 9.6 2 11.1v1.8c0 1.6.2 3.2.2 3.2s.2 1.4.8 2a2.8 2.8 0 0 0 2 1.1c2.6.4 6.9.4 6.9.4s4.3 0 6.9-.4a2.8 2.8 0 0 0 2-1.1c.6-.6.8-2 .8-2s.2-1.6.2-3.2v-1.8C22 9.6 21.8 8 21.8 8zM10 14.7V8.9l5.8 2.9L10 14.7z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    
+  <!-- =========  SCRIPTS  ========= -->
+  <!-- (baris di bawah disisipkan server jika user telah login) -->
+  <!-- <script>window.__USER__ = {name:"Virgi"};</script> -->
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+
+      /* util ambil user */
+      function getUser() {
+        if (window.__USER__) return window.__USER__;
+
+        const ls = localStorage.getItem("user");
+        if (ls) try { return JSON.parse(ls); } catch {}
+
+        const m = document.cookie.match(/(?:^|;)\s*user=([^;]+)/);
+        if (m) try { return JSON.parse(decodeURIComponent(m[1])); } catch {}
+
+        return null;
+      }
+
+      const user = getUser();
+      const isLoggedIn = !!user;
+
+      /* Navbar & tombol auth */
+      if (isLoggedIn) {
+        const navUser = document.getElementById("nav-user");
+        navUser.textContent = user.name;
+        document.getElementById("user-box").classList.remove("hidden");
+        document.querySelectorAll(".hide-when-auth").forEach(el => el.remove());
+
+        /* === toggle dropdown === */
+        const menu   = document.getElementById("user-menu");
+        navUser.addEventListener("click", () => {
+          menu.classList.toggle("hidden");
+        });
+        /* klik di mana saja untuk menutup */
+        document.addEventListener("click", (e) => {
+          if (!document.getElementById("user-box").contains(e.target))
+            menu.classList.add("hidden");
+        });
+      }
+
+
+      /* Tombol mood */
+      document.querySelectorAll('.mood-btn').forEach(btn =>
+        btn.addEventListener('click', e => {
+          e.preventDefault();
+
+          const slug = btn.dataset.mood;       // angry | happy | sad | bored
+          const next = `/${slug}.html`;        // → /sad.html
+
+          window.location.href = isLoggedIn
+            ? next
+            : `/login.html?next=${encodeURIComponent(next)}`;
+        })
+      );
+
+      /* contoh fetch */
+      fetch("/api/recipes").then(r=>r.json()).then(console.log);
+    });
+  </script>
+</body>
+</html>

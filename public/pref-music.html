@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sign Up • Music Pref</title>
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <style>body{font-family:'Poppins',sans-serif}</style>
+</head>
+<body class="py-16">
+  <h1 class="text-center text-2xl font-bold mb-10">Sign Up</h1>
+
+  <!-- ========= FORM PREFERENSI MUSIK ========= -->
+  <form action="/api/prefs/music"
+        method="POST"
+        class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 text-sm">
+
+    <!-- 1. Mood SEDIH -->
+    <div>
+      <p class="font-semibold mb-4">
+        1. Saat kamu merasa <span class="font-bold">sedih</span>, kamu lebih suka mendengarkan
+      </p>
+      <label class="flex items-center gap-2 mb-2">
+        <input type="radio" name="sad" value="mellow" required> Mellow
+      </label>
+      <label class="flex items-center gap-2 mb-2">
+        <input type="radio" name="sad" value="calm"> Calm
+      </label>
+      <label class="flex items-center gap-2 mb-2">
+        <input type="radio" name="sad" value="dance"> Dance
+      </label>
+      <label class="flex items-center gap-2">
+        <input type="radio" name="sad" value="none"> None
+      </label>
+    </div>
+
+    <!-- 2. Mood SENANG -->
+    <div>
+      <p class="font-semibold mb-4">
+        2. Saat kamu merasa <span class="font-bold">senang</span>, kamu biasanya mendengarkan
+      </p>
+      <label class="flex items-center gap-2 mb-2">
+        <input type="radio" name="happy" value="dance" required> Dance
+      </label>
+      <label class="flex items-center gap-2 mb-2">
+        <input type="radio" name="happy" value="pop"> Pop
+      </label>
+      <label class="flex items-center gap-2 mb-2">
+        <input type="radio" name="happy" value="nostalgic"> Nostalgic
+      </label>
+      <label class="flex items-center gap-2">
+        <input type="radio" name="happy" value="random"> Random
+      </label>
+    </div>
+
+    <!-- 3. Mood MARAH -->
+    <div>
+      <p class="font-semibold mb-4">
+        3. Saat kamu merasa <span class="font-bold">marah</span>, kamu cenderung memilih
+      </p>
+      <label class="flex items-center gap-2 mb-2">
+        <input type="radio" name="angry" value="rock" required> Rock
+      </label>
+      <label class="flex items-center gap-2 mb-2">
+        <input type="radio" name="angry" value="calm"> Calm
+      </label>
+      <label class="flex items-center gap-2 mb-2">
+        <input type="radio" name="angry" value="pop"> Pop
+      </label>
+      <label class="flex items-center gap-2">
+        <input type="radio" name="angry" value="none"> None
+      </label>
+    </div>
+
+    <!-- 4. Mood BOSAN -->
+    <div>
+      <p class="font-semibold mb-4">
+        4. Saat kamu merasa <span class="font-bold">bosan</span>, kamu suka memilih
+      </p>
+      <label class="flex items-center gap-2 mb-2">
+        <input type="radio" name="bored" value="alternative" required> Alternative
+      </label>
+      <label class="flex items-center gap-2 mb-2">
+        <input type="radio" name="bored" value="calm"> Calm
+      </label>
+      <label class="flex items-center gap-2 mb-2">
+        <input type="radio" name="bored" value="viral"> Viral
+      </label>
+      <label class="flex items-center gap-2">
+        <input type="radio" name="bored" value="podcast"> Podcast
+      </label>
+    </div>
+
+    <!-- tombol -->
+    <div class="col-span-full flex justify-center mt-8">
+      <button type="submit"
+              class="bg-rose-300 hover:bg-rose-400 text-white font-semibold
+                     px-20 py-3 rounded-full">
+        Kirim
+      </button>
+    </div>
+  </form>
+</body>
+</html>
