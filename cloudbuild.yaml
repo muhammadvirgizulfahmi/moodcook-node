@@ -1,6 +1,11 @@
-steps:
-  - name: 'gcr.io/cloud-builders/docker'
-    args: [ 'build', '-t', '${_IMAGE}', '.' ]
-images: [ '${_IMAGE}' ]
-options:
-  logging: CLOUD_LOGGING_ONLY
+name: Build & Push to ACR
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - run: echo ${{ secrets.ACR_PASSWORD }} | docker login moodcookacr.azurecr.io \
+            -u ${{ secrets.ACR_USERNAME }} --password-stdin
+    - run: docker build -t moodcookacr.azurecr.io/moodcook:latest .
+    - run: docker push moodcookacr.azurecr.io/moodcook:latest
