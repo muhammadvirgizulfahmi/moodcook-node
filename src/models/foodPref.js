@@ -1,11 +1,15 @@
-// src/models/foodPref.js
+// src/models/foodPref.js (Versi Final yang Diperbaiki)
 import { DataTypes } from 'sequelize';
 import { sequelize } from '../config/database.js';
 import { User } from './user.js';
 
 export const FoodPref = sequelize.define('FoodPref', {
-  mood:   DataTypes.STRING,       // angry, sad, happy, bored
-  taste:  DataTypes.STRING,       // pedas, manis, dll.
+  mood:  DataTypes.STRING,
+  taste: DataTypes.STRING,
+  // Kita tidak perlu mendefinisikan userId di sini, asosiasi di bawah sudah cukup
+  // Namun, untuk memastikan, kita akan menggunakan foreignKey di asosiasi
 });
-User.hasMany(FoodPref);  // FK userId
-FoodPref.belongsTo(User);
+
+// Definisikan asosiasi secara eksplisit dengan foreignKey
+User.hasMany(FoodPref, { foreignKey: 'userId' });
+FoodPref.belongsTo(User, { foreignKey: 'userId' });

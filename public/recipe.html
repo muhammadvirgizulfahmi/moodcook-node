@@ -5,7 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MoodCook | Resep Makanan</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  </head>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family:"Poppins",sans-serif; }
+  </style>
+</head>
 <body class="font-sans antialiased bg-white text-gray-900">
   <header class="bg-[#e8b9c2] shadow-sm">
     <div class="container mx-auto flex items-center justify-between py-4 px-4 md:px-8">
@@ -13,7 +17,7 @@
 
       <nav class="hidden md:flex gap-8 text-sm font-semibold uppercase">
         <a href="/"        class="hover:text-yellow-600">Beranda</a>
-        <a href="#tentang" class="hover:text-yellow-600">Tentang Kami</a>
+        <a href="/index.html#tentang" class="hover:text-yellow-600">Tentang Kami</a>
         <a href="/recipe.html"   class="hover:text-yellow-600">Resep</a>
       </nav>
 
@@ -45,22 +49,28 @@
     <h1 class="text-4xl md:text-5xl font-bold text-center text-rose-600 mb-14">Resep Makanan</h1>
 
     <div class="grid gap-10 md:grid-cols-3">
-      <article class="flex flex-col">
+      <article class="flex flex-col" data-recipe-id="3">
         <img src="assets/pasta.png" alt="Spicy Tuscan Chicken Pasta" class="rounded-lg object-cover h-64 w-full" />
         <h2 class="mt-5 mb-4 font-semibold leading-tight">Spicy Tuscan Chicken Pasta</h2>
-        <button class="mt-auto self-center bg-rose-600 text-white py-2 px-7 rounded-full text-sm hover:bg-rose-700 transition">Lihat Resep</button>
+        <button class="recipe-btn mt-auto self-center bg-rose-600 text-white py-2 px-7 rounded-full text-sm hover:bg-rose-700 transition">Lihat Resep</button>
       </article>
 
-      <article class="flex flex-col">
+      <article class="flex flex-col" data-recipe-id="1">
         <img src="assets/fajitas.png" alt="Sheet Pan Chicken Fajitas" class="rounded-lg object-cover h-64 w-full" />
         <h2 class="mt-5 mb-4 font-semibold leading-tight">Sheet Pan Chicken Fajitas</h2>
-        <button class="mt-auto self-center bg-rose-600 text-white py-2 px-7 rounded-full text-sm hover:bg-rose-700 transition">Lihat Resep</button>
+        <button class="recipe-btn mt-auto self-center bg-rose-600 text-white py-2 px-7 rounded-full text-sm hover:bg-rose-700 transition">Lihat Resep</button>
       </article>
 
-      <article class="flex flex-col">
+      <article class="flex flex-col" data-recipe-id="2">
         <img src="assets/cookie.png" alt="Chocolate Chunk Coconut Pecan Skillet Cookie" class="rounded-lg object-cover h-64 w-full" />
         <h2 class="mt-5 mb-4 font-semibold leading-tight">Chocolate Chunk Coconut Pecan Skillet&nbsp;Cookie</h2>
-        <button class="mt-auto self-center bg-rose-600 text-white py-2 px-7 rounded-full text-sm hover:bg-rose-700 transition">Lihat Resep</button>
+        <button class="recipe-btn mt-auto self-center bg-rose-600 text-white py-2 px-7 rounded-full text-sm hover:bg-rose-700 transition">Lihat Resep</button>
+      </article>
+
+        <article class="flex flex-col" data-recipe-id="4">
+        <img src="assets/crockpot.png" alt="Crockpot Hearty Chicken and Rice Soup" class="rounded-lg object-cover h-64 w-full" />
+        <h2 class="mt-5 mb-4 font-semibold leading-tight">Crockpot Hearty Chicken and Rice Soup</h2>
+        <button class="recipe-btn mt-auto self-center bg-rose-600 text-white py-2 px-7 rounded-full text-sm hover:bg-rose-700 transition">Lihat Resep</button>
       </article>
     </div>
   </main>
@@ -207,6 +217,250 @@
         const flavor = card.dataset.flavor;    // "pedas", "asin", ...
         card.classList.toggle("hidden", flavor !== pref);
       });
+    });
+  </script>
+
+  <div id="recipe-overlay" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+    <div class="bg-white rounded-lg shadow-2xl w-full max-w-4xl max-h-[90vh] flex flex-col">
+      <button id="close-overlay-btn" class="absolute -top-2 -right-2 bg-white rounded-full p-1 text-gray-800 hover:bg-gray-200">
+        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+
+      <div class="overflow-y-auto p-6 md:p-8">
+        <div class="mb-6">
+          <h2 id="overlay-title" class="text-2xl md:text-3xl font-extrabold text-rose-600"></h2>
+          <div id="overlay-times" class="mt-3 flex items-center gap-4 text-xs text-gray-600">
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <img id="overlay-image" src="" alt="" class="rounded-lg object-cover w-full h-auto max-h-96">
+          
+          <div id="overlay-ingredients-box" class="bg-amber-50 border border-amber-200 rounded-lg p-6">
+            <h3 class="font-bold text-lg mb-4">Bahan-Bahan</h3>
+            <ul id="overlay-ingredients-list" class="space-y-2 text-sm list-disc list-inside">
+              </ul>
+          </div>
+        </div>
+
+        <div id="overlay-steps-box" class="mt-8">
+          <h3 class="font-bold text-lg mb-4">Langkah-Langkah</h3>
+          <div id="overlay-steps-list" class="space-y-4 text-sm leading-relaxed">
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // --- DATABASE RESEP (sementara di JavaScript) ---
+     const recipesData = [
+        {
+          id: '1', // ID ini harus cocok dengan ID resep di database Anda
+          title: 'Sheet Pan Chicken Fajitas',
+          image: 'assets/fajitas.png', // Pastikan path ini benar
+          prepTime: '±15 menit',
+          cookTime: '±25 menit',
+          totalTime: '±40 menit',
+          ingredients: [
+            '1 pon (sekitar 450 gr) dada ayam tanpa tulang, iris tipis',
+            '3 buah paprika (berbagai warna), iris tipis',
+            '2 bawang bombay kecil (atau 1 besar), iris tipis',
+            '2 sdm minyak goreng (zaitun, alpukat, atau sayur)',
+            '8 buah tortilla ukuran 6-inci',
+            '1 buah jeruk nipis, potong-potong',
+            'Daun cilantro atau ketumbar segar (opsional, untuk taburan)',
+            'Sour cream atau yogurt tawar (opsional, untuk saus)',
+            'Bumbu Fajita (campurkan dalam satu mangkuk kecil):',
+            '1 sdm bubuk cabai (chili powder)',
+            '1/2 sdm paprika',
+            '1/2 sdt bubuk bawang bombay (onion powder)',
+            '1/4 sdt bubuk bawang putih (garlic powder)',
+            '1/4 sdt jintan (cumin)',
+            '1/2 sdt garam',
+            'Sejumput bubuk cayenne (opsional, untuk rasa pedas)'
+          ],
+          steps: [
+            '<strong>1. Panaskan Oven dan Siapkan Bumbu:</strong> Panaskan oven Anda hingga 400°F atau 200°C. Dalam sebuah mangkuk kecil, campurkan semua bahan untuk "Bumbu Fajita" dan aduk hingga rata.',
+            '<strong>2. Siapkan Bahan Utama:</strong> Iris dada ayam, paprika, dan bawang bombay menjadi potongan memanjang setebal sekitar 1/4 inci.',
+            '<strong>3. Bumbui Ayam dan Sayuran:</strong> Letakkan irisan ayam, paprika, dan bawang bombay di atas loyang panggang (sheet pan) yang besar. Siram dengan 2 sendok makan minyak goreng, lalu taburkan campuran bumbu fajita di atasnya.',
+            '<strong>4. Aduk Rata:</strong> Gunakan tangan atau spatula besar untuk mengaduk semua bahan di atas loyang hingga ayam dan sayuran terlapisi minyak serta bumbu secara merata.',
+            '<strong>5. Panggang:</strong> Panggang di dalam oven yang sudah dipanaskan selama 35-40 menit. Aduk atau balik bahan-bahan di tengah waktu memanggang (sekitar menit ke-20) agar matang merata.',
+            '<strong>6. Sajikan:</strong> Setelah matang (ayam tidak lagi berwarna pink dan sayuran sedikit gosong di pinggirnya), keluarkan dari oven. Peras jus jeruk nipis di atasnya dan taburi dengan daun cilantro jika suka. Sajikan segera dengan tortilla hangat dan sour cream.'
+          ]
+        },
+        // Anda bisa tambahkan data resep lain di sini dengan ID yang sesuai
+                  {
+          id: '2', // ID ini harus cocok dengan ID resep di database Anda
+          title: 'Chocolate Chunk Coconut Pecan Skillet Cookie',
+          image: 'assets/cookie.png', // Pastikan path ini benar
+          prepTime: '±10 menit',
+          cookTime: '±18-20 menit',
+          totalTime: '±30 menit',
+          ingredients: [
+            '1 cangkir (2 batang / 226g) mentega tawar',
+            '1 1/4 cangkir gula cokelat muda, padat',
+            '2 butir telur',
+            '1 sendok makan vanila ekstrak',
+            '2 1/4 cangkir tepung serbaguna',
+            '1 sendok teh baking soda',
+            '1/2 sendok teh garam',
+            '1 cangkir kelapa kering manis',
+            '1/2 cangkir pecan cincang',
+            '1 1/2 cangkir cokelat chunk (atau chocolate chips)',
+            'Garam laut kasar (opsional)'
+          ],
+          steps: [
+            '<strong>1. Panaskan Oven:</strong> Panaskan oven ke suhu 175°C (350°F). Siapkan wajan besi ukuran 26–30 cm (10–12 inci), olesi tipis dengan mentega.',
+            '<strong>2. Campur Bahan Basah:</strong> Dalam mangkuk besar, kocok mentega dan gula cokelat hingga lembut dan menyatu. Tambahkan telur satu per satu, lalu masukkan vanila.',
+            '<strong>3. Masukkan Bahan Kering:</strong> Campurkan tepung, baking soda, dan garam ke dalam adonan. Aduk hingga rata.',
+            '<strong>4. Tambahkan Isian:</strong> Masukkan kelapa, pecan, dan cokelat chunk. Aduk rata',
+            '<strong>5. Tuang ke Wajan:</strong> Masukkan adonan ke wajan, ratakan permukaannya.',
+            '<strong>6. Panggang:</strong> Panggang selama ±18–20 menit atau hingga bagian atasnya berwarna keemasan, tapi bagian tengahnya masih sedikit lembek (supaya chewy!).',
+            '<strong>7. Sajikan:</strong> Sajikan langsung dari wajan. Tambahkan garam laut di atasnya jika suka. Nikmati hangat-hangat — cocok banget dengan es krim vanila '
+          ]
+        },
+          {
+          id: '3', // ID ini harus cocok dengan ID resep di database Anda
+          title: 'Spicy Tuscan Chicken Pasta',
+          image: 'assets/pasta.png', // Pastikan path ini benar
+          prepTime: '±10 menit',
+          cookTime: '±20 menit',
+          totalTime: '±30 menit',
+          ingredients: [
+            '500 gr pasta (seperti penne atau fusilli)',
+            '2 sdm minyak zaitun',
+            '2 dada ayam tanpa tulang, potong dadu',
+            '2 sdt oregano kering',
+            'Garam dan lada hitam secukupnya',
+            '4 siung bawang putih, cincang',
+            '1 sdm mentega',
+            '1/2 cangkir tomat kering, potong kecil',
+            '1 sdt serpihan cabai merah (opsional)',
+            '1 cangkir krim kental',
+            '3/4 cangkir keju parmesan parut',
+            '2 cangkir bayam segar',
+            '1/4 cangkir daun basil segar, cincang',
+            'Air rebusan pasta (opsional, jika butuh encerkan saus)'
+          ],
+          steps: [
+            '<strong>1. Rebus:</strong> Rebus pasta dalam air garam hingga al dente. Sisihkan ±1 cangkir air rebusan, tiriskan pasta.',
+            '<strong>2. Masak Ayam:</strong> Panaskan minyak zaitun di wajan besar. Masukkan ayam, taburi oregano, garam, dan lada. Masak hingga matang dan kecokelatan (±5–8 menit). Angkat dari wajan.',
+            '<strong>3. Tumis Bawang dan Tomat:</strong> Di wajan yang sama, lelehkan mentega, tumis bawang putih dan tomat kering selama ±2 menit hingga harum. Tambahkan serpihan cabai jika suka pedas.',
+            '<strong>4. Buat Saus:</strong> Tuang krim kental, aduk rata. Masak 2–3 menit hingga sedikit mengental. Tambahkan parmesan, aduk hingga meleleh. Tambahkan bayam dan basil, aduk sampai layu.',
+            '<strong>5. Gabungkan:</strong> Masukkan ayam dan pasta ke dalam saus. Aduk rata. Jika terlalu kental, tambahkan air rebusan pasta sedikit demi sedikit.',
+            '<strong>6. Sajikan:</strong> Taburi parmesan tambahan dan basil. Nikmati hangat!'
+          ]
+        },
+
+                {
+          id: '4', // ID ini harus cocok dengan ID resep di database Anda
+          title: 'Crockpot Hearty Chicken and Rice Soup',
+          image: 'assets/crockpot.png', // Pastikan path ini benar
+          prepTime: '15 menit',
+          cookTime: '4 jam (slow)',
+          totalTime: '4 jam 15 menit',
+          ingredients: [
+            '2 sdm minyak zaitun extra virgin',
+            '1 bawang bombay, cincang',
+            '2 wortel, iris tipis',
+            '2 batang seledri, iris',
+            '4 siung bawang putih, cincang',
+            '1 sdm thyme kering',
+            '2 lembar daun salam',
+            '1 sdt serpihan cabai merah (opsional)',
+            'Garam dan lada hitam secukupnya',
+            '8 cangkir kaldu ayam',
+            '1 cangkir beras putih atau merah',
+            '2 dada ayam tanpa tulang',
+            '1 sdm kecap asin',
+            '1/2 cangkir daun parsley segar, cincang',
+            'Jus dari 1/2 lemon'
+          ],
+          steps: [
+            '<strong>1. Siapkan Crock-Pot:</strong> Masukkan potongan dada ayam tanpa tulang, bawang bombay, wortel, dan seledri ke dalam slow cooker atau crock-pot.',
+            '<strong>2. Tambahkan Cairan dan Bumbu:</strong> Tuangkan kaldu ayam dan beras. Masukkan bawang putih cincang, thyme kering, daun salam, serpihan cabai merah (jika suka), garam, dan lada hitam.',
+            '<strong>3. Masak Perlahan:</strong> Tutup crock-pot dan masak dengan pengaturan "Low" selama 6-8 jam atau "High" selama 3-4 jam, hingga ayam sangat empuk dan mudah disuwir.',
+            '<strong>4. Suwir Ayam:</strong> Angkat potongan dada ayam dari sup dan letakkan di atas talenan. Gunakan dua garpu untuk menyuwir daging ayam, lalu masukkan kembali suwiran ayam ke dalam crock-pot.',
+            '<strong>5. Sentuhan Akhir:</strong> Buang daun salam. Masukkan kecap asin, parsley segar yang sudah dicincang, dan jus lemon. Aduk rata. Cicipi dan koreksi rasa jika perlu. Sajikan sup selagi hangat.'
+          ]
+        },
+    ];
+
+      // --- ELEMEN-ELEMEN DOM ---
+      const overlay = document.getElementById('recipe-overlay');
+      const closeBtn = document.getElementById('close-overlay-btn');
+      const recipeBtns = document.querySelectorAll('.recipe-btn');
+      
+      const overlayTitle = document.getElementById('overlay-title');
+      const overlayTimes = document.getElementById('overlay-times');
+      const overlayImage = document.getElementById('overlay-image');
+      const overlayIngredientsList = document.getElementById('overlay-ingredients-list');
+      const overlayStepsList = document.getElementById('overlay-steps-list');
+
+      // --- FUNGSI-FUNGSI ---
+      function openOverlay(recipeId) {
+        const recipe = recipesData.find(r => r.id === recipeId);
+        if (!recipe) return;
+
+        // Mengisi data ke elemen-elemen di overlay
+        overlayTitle.textContent = recipe.title;
+        overlayImage.src = recipe.image;
+        overlayImage.alt = recipe.title;
+
+        // Mengisi data waktu
+        overlayTimes.innerHTML = `
+          <span>Waktu Persiapan: ${recipe.prepTime}</span>
+          <span>•</span>
+          <span>Waktu Memasak: ${recipe.cookTime}</span>
+          <span>•</span>
+          <span>Total: ${recipe.totalTime}</span>
+        `;
+
+        // Mengisi daftar bahan
+        overlayIngredientsList.innerHTML = recipe.ingredients.map(item => `<li>${item}</li>`).join('');
+
+        // Mengisi langkah-langkah
+        overlayStepsList.innerHTML = recipe.steps.map(step => `<p>${step}</p>`).join('');
+
+        // Tampilkan overlay
+        overlay.classList.remove('hidden');
+      }
+
+      function closeOverlay() {
+        overlay.classList.add('hidden');
+      }
+
+      // --- EVENT LISTENERS ---
+      
+      // Listener untuk semua tombol "Lihat Resep"
+      recipeBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const card = btn.closest('article');
+          const recipeId = card.dataset.recipeId;
+          openOverlay(recipeId);
+        });
+      });
+
+      // Listener untuk tombol close (X)
+      closeBtn.addEventListener('click', closeOverlay);
+
+      // Listener untuk klik di luar kotak modal (di backdrop)
+      overlay.addEventListener('click', (event) => {
+        if (event.target === overlay) {
+          closeOverlay();
+        }
+      });
+      
+      // Listener untuk tombol 'Escape'
+      window.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && !overlay.classList.contains('hidden')) {
+          closeOverlay();
+        }
+      });
+
     });
   </script>
 </body>

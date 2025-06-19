@@ -4,6 +4,7 @@ import { Mood } from './mood.js';
 
 export const Recipe = sequelize.define('Recipe', {
   title: DataTypes.STRING,
+  taste: { type: DataTypes.STRING, allowNull: true },
   mood_id: { type: DataTypes.INTEGER.UNSIGNED, allowNull: true },
   ingredients: DataTypes.TEXT,
   steps: DataTypes.TEXT('long'),

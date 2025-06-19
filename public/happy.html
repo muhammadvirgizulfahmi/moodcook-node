@@ -3,13 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Mood • Sedih</title>
-
+  <title>Mood • Senang</title>
   <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <style>body{font-family:"Poppins",sans-serif}</style>
 </head>
-
 <body class="text-gray-800">
 <header class="bg-[#e8b9c2] shadow-sm">
   <div class="container mx-auto flex items-center justify-between py-4 px-4 md:px-8">
@@ -23,31 +21,27 @@
     <div id="user-box" class="relative hidden md:inline-block">
       <span id="nav-user" class="cursor-pointer font-semibold text-gray-700 select-none"></span>
       <div id="user-menu" class="hidden absolute right-0 mt-2 w-32 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
-        <form method="POST" action="/api/logout">
-          <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Logout</button>
-        </form>
+        <form method="POST" action="/api/logout"><button type="submit" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Logout</button></form>
       </div>
     </div>
   </div>
 </header>
-
 <section class="pt-12 pb-10 text-center">
-  <h2 class="text-xl md:text-2xl font-semibold leading-relaxed max-w-3xl mx-auto">Sedih itu wajar… Yuk, kita temani dengan makanan hangat<br />dan musik yang menenangkan</h2>
+  <h2 class="text-xl md:text-2xl font-semibold leading-relaxed max-w-3xl mx-auto">Wah, kamu lagi bahagia ya! Ini sajian <br />yang bisa bikin harimu makin cerah </h2>
   <p class="mt-8 text-lg font-medium">Mood Kamu :</p>
   <div class="mt-4 flex flex-col items-center gap-4">
-    <img src="assets/sedih.png" alt="Sad Mood" class="w-36 select-none" draggable="false" />
-    <span class="text-lg font-semibold">Sedih</span>
+    <img src="assets/senang.png" alt="Happy Mood" class="w-36 select-none" draggable="false" />
+    <span class="text-lg font-semibold">Senang</span>
   </div>
 </section>
 <section>
-  <div class="bg-cyan-700/50 font-semibold text-center text-sm border-2 border-black">
-    <div class="py-3">Resep Yang Cocok Untuk Mood Kamu.</div>
+  <div class="bg-rose-200/90 font-semibold text-center text-sm border-2 border-black">
+    <div class="py-3">Resep Yang Cocok Untuk Mood Kamu!</div>
   </div>
   <div class="flex justify-center py-10 px-4">
     <div id="recipe-list" class="flex flex-col items-center gap-10"><p class="text-sm text-gray-500">Memuat rekomendasi resep...</p></div>
   </div>
 </section>
-
     <!-- ===== FOOTER ===== -->
     <footer class="bg-[#e8b9c2] py-16 text-sm text-gray-100">
       <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 px-6 md:px-8">
@@ -138,32 +132,21 @@
         </div>
       </div>
     </footer>
-
-  <div id="recipe-overlay" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-    <div class="bg-white rounded-lg shadow-2xl w-full max-w-4xl max-h-[90vh] flex flex-col relative">
-      <button id="close-overlay-btn" class="absolute top-3 right-3 bg-gray-100 rounded-full p-1 text-gray-600 hover:bg-gray-200 z-10">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-      </button>
-      <div class="overflow-y-auto p-6 md:p-8">
-        <div class="mb-6">
-          <h2 id="overlay-title" class="text-2xl md:text-3xl font-extrabold text-rose-600 pr-8"></h2>
-          <div id="overlay-times" class="mt-3 flex items-center flex-wrap gap-x-4 gap-y-1 text-xs text-gray-600"></div>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <img id="overlay-image" src="" alt="" class="rounded-lg object-cover w-full h-auto max-h-96">
-          <div id="overlay-ingredients-box" class="bg-amber-50 border border-amber-200 rounded-lg p-6">
-            <h3 class="font-bold text-lg mb-4">Bahan-Bahan</h3>
-            <ul id="overlay-ingredients-list" class="space-y-2 text-sm list-disc list-inside"></ul>
-          </div>
-        </div>
-        <div id="overlay-steps-box" class="mt-8">
-          <h3 class="font-bold text-lg mb-4">Langkah-Langkah</h3>
-          <div id="overlay-steps-list" class="space-y-4 text-sm leading-relaxed"></div>
+<div id="recipe-overlay" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+  <div class="bg-white rounded-lg shadow-2xl w-full max-w-4xl max-h-[90vh] flex flex-col relative">
+    <button id="close-overlay-btn" class="absolute top-3 right-3 bg-gray-100 rounded-full p-1 text-gray-600 hover:bg-gray-200 z-10"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>
+    <div class="overflow-y-auto p-6 md:p-8">
+      <div class="mb-6"><h2 id="overlay-title" class="text-2xl md:text-3xl font-extrabold text-rose-600 pr-8"></h2><div id="overlay-times" class="mt-3 flex items-center flex-wrap gap-x-4 gap-y-1 text-xs text-gray-600"></div></div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <img id="overlay-image" src="" alt="" class="rounded-lg object-cover w-full h-auto max-h-96">
+        <div id="overlay-ingredients-box" class="bg-amber-50 border border-amber-200 rounded-lg p-6">
+          <h3 class="font-bold text-lg mb-4">Bahan-Bahan</h3><ul id="overlay-ingredients-list" class="space-y-2 text-sm list-disc list-inside"></ul>
         </div>
       </div>
+      <div id="overlay-steps-box" class="mt-8"><h3 class="font-bold text-lg mb-4">Langkah-Langkah</h3><div id="overlay-steps-list" class="space-y-4 text-sm leading-relaxed"></div></div>
     </div>
   </div>
-
+</div>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
     
@@ -206,7 +189,7 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         // Anda bisa tambahkan data resep lain di sini dengan ID yang sesuai
                   {
-          id: '2', // ID ini harus cocok dengan ID resep di database Anda
+          id:'2', // ID ini harus cocok dengan ID resep di database Anda
           title: 'Chocolate Chunk Coconut Pecan Skillet Cookie',
           image: 'assets/cookie.png', // Pastikan path ini benar
           prepTime: '±10 menit',
@@ -396,7 +379,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const prefResponse = await fetch('/api/prefs/food');
             if (!prefResponse.ok) throw new Error('Gagal mengambil preferensi.');
             const userPreferences = await prefResponse.json();
-            const targetTaste = userPreferences.sad || 'asin'; // Fallback ke 'asin' karena kita punya data resep asin
+            const targetTaste = userPreferences.happy || 'asin'; // Fallback ke 'asin' karena kita punya data resep asin
             const recipeResponse = await fetch(`/api/recipes/recommend?taste=${targetTaste}`);
             if (!recipeResponse.ok) throw new Error('Gagal mengambil resep.');
             const recommendedRecipes = await recipeResponse.json();
